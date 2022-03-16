@@ -25,8 +25,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //  Creates an instance of the Game class.
-function Game(gameCanvas, invaderImgs, ufoImg) {
-
+function Game(gameCanvas, shipImg, invaderImgs, ufoImg) {
   //  Set the initial config.
   this.config = {
     fps: 50,
@@ -35,6 +34,7 @@ function Game(gameCanvas, invaderImgs, ufoImg) {
     rockets: { velocity: 500, maxFireRate: 4, max: 1 },
     game: { width: 500, height: 400 },
     ship: { speed: 120, width: 75, height: 25 },
+    shipImg: shipImg,
 
     levelDifficultyMultiplier: 0.2,
 
@@ -217,7 +217,7 @@ function PlayState(config, level) {
 PlayState.prototype = {
   enter: function (game) {
     //  Create the ship.
-    this.ship = new Ship(game.width / 2, game.gameBounds.bottom, game.config.ship.width, game.config.ship.height, game.config.ship.speed);
+    this.ship = new Ship(game.width / 2, game.gameBounds.bottom, game.config.ship.width, game.config.ship.height, game.config.ship.speed, game.config.shipImg);
     this.invaders = CreateInvaders(game, this.level)
     this.rockets = CreateRockets(game);
     this.bombs = CreateBombs(game, this.config.bombs);

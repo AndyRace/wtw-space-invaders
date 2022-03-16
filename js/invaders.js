@@ -51,8 +51,13 @@ function CreateInvaders(game, level) {
     var gapY = 5;
     var y = game.gameBounds.top;
 
+    var invaders = [];
+
     for (var rank = 0; rank < ranks; rank++) {
-      var img = game.invaderImgs[Math.floor(Math.random() * game.invaderImgs.length)];
+      if (invaders.length === 0) invaders = Array.from(game.invaderImgs);
+
+      var n = Math.floor(Math.random() * invaders.length);
+      var img = invaders.splice(n, 1)[0];
 
       img.height = img.height * (game.config.invaders.width / img.width);
       img.width = game.config.invaders.width;

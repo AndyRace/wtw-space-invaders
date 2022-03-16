@@ -63,9 +63,11 @@
       <li><img src="images\emb old.png" /></li>
       <li><img src="images\towers perrin.png" /></li>
       <li><img src="images\ww.png" /></li>
+      <li><img src="images\wtw.png" /></li>
     </ul>
     
     <img id="spaceship" src="images\rubber-chicken.png" style="visibility:hidden"/>
+    <img id="ship" src="images\wtw.svg" style="visibility: hidden"/>
   </div>
 
   <audio id="shoot-sound" src="sounds/shoot.wav"></audio>
@@ -98,6 +100,7 @@
     //  Create the game.
     var game = new Game(
             document.getElementById("gameCanvas"),
+            document.getElementById("ship"),
             document.getElementById("invaders").getElementsByTagName("img"),
             document.getElementById("spaceship"));
 
