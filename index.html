@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WTW Space Invaders</title>
+  <link rel="stylesheet" type="text/css" href="css/core.css">
+  <link rel="stylesheet" type="text/css" href="css/typeography.css">
+  <style>
+    /* Styling needed for a fullscreen canvas and no scrollbars. */
+    body, html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #background {
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    #gamecontainer {
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #gamecanvas {
+      width: 800px;
+      height: 600px;
+    }
+
+    #info {
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="background"></div>
+  <div id="gamecontainer">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+  <div id="info">
+    <p>
+      Move with arrow keys, fire with the space bar. The invaders get faster and drop
+      more bombs as you complete each level!
+    </p>
+    <p>
+      <a id="muteLink" href="#" onclick="toggleMute()">mute</a> |
+      Adapted by Andy Race from <a href="http://github.com/dwmkerr/spaceinvaders">spaceinvaders on github</a> |
+      <a href="http://www.dwmkerr.com/experiments">more experiments</a> | <a href="http://www.dwmkerr.com">dwmkerr.com</a>
+    </p>
+    <ul id="invaders" style="visibility:hidden">
+      <li><img src="images\emb.png" /></li>
+      <li><img src="images\tw.jpg" /></li>
+      <li><img src="images\willis.jpg" /></li>
+      <li><img src="images\emb old.png" /></li>
+      <li><img src="images\towers perrin.png" /></li>
+      <li><img src="images\ww.png" /></li>
+    </ul>
+    
+    <img id="spaceship" src="images\rubber-chicken.png" style="visibility:hidden"/>
+  </div>
+
+  <audio id="shoot-sound" src="sounds/shoot.wav"></audio>
+  <audio id="bang-sound" src="sounds/bang.wav"></audio>
+  <audio id="explosion-sound" src="sounds/explosion.wav"></audio>
+  <audio id="invader-killed-sound" src="sounds/invaderKilled.wav"></audio>
+  <audio id="ufo-killed-sound" src="sounds/ufoKilled.wav"></audio>
+  <audio id="ufo-sound" src="sounds/ufo_lowpitch.wav"></audio>
+  <audio id="invader1-sound" src="sounds/fastinvader1.wav"></audio>
+  <audio id="invader2-sound" src="sounds/fastinvader2.wav"></audio>
+  <audio id="invader3-sound" src="sounds/fastinvader3.wav"></audio>
+  
+  <script src="js/engine.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/spaceinvaders.js"></script>
+  <script src="js/rockets.js"></script>
+  <script src="js/bombs.js"></script>
+  <script src="js/invaders.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/ship.js"></script>
+  <script src="js/ufos.js"></script>
+
+  <script>
+    //  Create the background.
+    var background = new Background(document.getElementById('background'));
+
+    // start the background animations
+    background.start();
+    
+    //  Create the game.
+    var game = new Game(
+            document.getElementById("gameCanvas"),
+            document.getElementById("invaders").getElementsByTagName("img"),
+            document.getElementById("spaceship"));
+
+    //  Start the game.
+    game.start();
+
+    function toggleMute() {
+      game.sounds.muted = !game.sounds.muted;
+      document.getElementById("muteLink").innerText = game.sounds.muted ? "unmute" : "mute";
+    }
+  </script>
+</body>
+</html>
